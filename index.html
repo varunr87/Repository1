@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>Start Page</title>
+
+    <link rel="stylesheet" href="Resources/css/stronger.ui.css" />
+    <link rel="stylesheet" href="Style/custom.css" />
+    
+    <script type="text/javascript" src="Resources/js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="Resources/js/jquery.stronger.js"></script>
+    <script type="text/javascript" src="Scripts/ux.js"></script>
+    <script type="text/javascript" src="Scripts/BackendData.js"></script>
+    <script type="text/javascript" src="Scripts/mustache.js"></script>
+    
+</head>
+<body>
+
+    <input id="idHiddenBreadcrumb" type="hidden" value="" />
+    <input id="idHiddenCustomer" type="hidden" value="" />
+    <input id="idHiddenMaterial" type="hidden" value="" />
+    <input id="idHiddenPlantCode" type="hidden" value="" />
+    
+    <div class="stronger-loader-container">
+        <div class="stronger-loader-inner">
+            <img class="stronger-loader-img" />
+        </div>
+    </div>
+
+    <div class="header row-fluid">
+        <div class="header-item span1">
+                <button class="btn btn-inverse header-item" onclick="backButton();">
+                    <img class="icon-backward" />
+                </button>
+        </div>
+        <div class="header-item span1">
+            <button class="btn btn-inverse header-item" onclick="homeButton();">
+                <img class="icon-home" />
+            </button>
+        </div>
+        <div class="header-item span8">
+            <div class="row-fluid">
+                <div class="span3">
+                    <div id="id-Perf-Time">
+                        0ms
+                    </div>
+                    <div class="btn-group selector-group">
+                        <button id="id-Btn-OData" class="btn btn-primary selector-btn" onclick="onClick_OData();">OData</button>
+                        <button id="id-Btn-Soap" class="btn selector-btn" onclick="onClick_Soap();">Soap</button>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div id="idHeading">Customers</div>
+                </div>
+                <div class="span3"></div>
+            </div>
+        </div>
+        <div class="header-item span2">
+            <img class="header-item" src="Resources/img/timken-logo-orange.png" alt="Timken Logo" />
+        </div>
+    </div>
+    
+    <div class="row-fluid content-row">
+        <div class="span6 content-pane-item-list span6-width-correction">
+            <table class="table table-responsive">
+                <tbody id="id-Left-Pane">
+                    <!-- Data Inserted through Mustache.js -->
+                </tbody>
+            </table>
+        </div>
+        <div class="span6 content-pane-item-detail span6-width-correction">
+            <div id="id-Right-Pane">
+                <!-- Data Inserted through Mustache.js -->
+            </div>
+        </div>
+    </div>
+
+    <script id="id-Left-Pane-Script" type="text/html">
+        {{#rows}}
+        <tr class="left-pane-row">
+            <td id="{{id}}">{{text}}</td>
+        </tr>
+        {{/rows}}
+    </script>
+
+    <script id="id-Right-Pane-Script" type="text/html">
+        <p> </p>
+        {{#rows}}
+        <p>
+        <small>{{key}}:</small><br />{{value}}
+        </p>
+        {{/rows}}
+        {{#button}}
+        <button id="id-Right-Pane-Button" class="btn btn-success" onclick="{{onClick}}">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;{{button}}&nbsp;&nbsp;&nbsp;&nbsp;<img class="icon-forward" /></span>
+        </button>
+        {{/button}}
+    </script>
+
+</body>
+</html>
